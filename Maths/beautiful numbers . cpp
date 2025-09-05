@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+// Function to check if a number is beautiful
+bool isBeautiful(long long n) {
+    string s = to_string(n);
+    map<char, int> counts;
+    for (char c : s) {
+        counts[c]++;
+    }
+
+    for (auto const& [digit, count] : counts) {
+        if (digit - '0' != count) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Function to find the smallest beautiful number greater than N
+long long beautifulNumber(long long N) {
+    long long current = N + 1;
+    while (true) {
+        if (isBeautiful(current)) {
+            return current;
+        }
+        current++;
+    }
+}
+
+int main() {
+    long long N;
+    cin >> N;
+    cout << beautifulNumber(N) << endl;
+    return 0;
+}
